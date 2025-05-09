@@ -1,0 +1,21 @@
+kind: ConfigMap
+metadata:
+  name: hello-html
+data:
+  index.html: |
+    <html><body><h1>Hello World</h1></body></html>
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-nginx-service
+spec:
+  selector:
+    app: hello-nginx
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: 31375
+  type: NodePort
