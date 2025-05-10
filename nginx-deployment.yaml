@@ -3,7 +3,7 @@ metadata:
   name: hello-html
 data:
   index.html: |
-    <html><body><h1>Hello World</h1></body></html>
+    <html><body><h1>Hello World Vijay</h1></body></html>
 
 ---
 apiVersion: v1
