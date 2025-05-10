@@ -1,0 +1,28 @@
+name: Deploy Nginx to k3s (Self-hosted)
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Set up kubeconfig
+      run: |
+        mkdir -p ~/.kube
+        sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
+        sudo chown $USER:$USER ~/.kube/config
+
+    - name: Apply Kubernetes manifest
+      run: kubectl apply -f nginx-deployment.yaml
+
+    - name: Verify Deployment
+      run: |
+        kubectl get pods
+        kubectl get svc
